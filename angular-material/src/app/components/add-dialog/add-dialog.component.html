@@ -1,0 +1,81 @@
+<!-- <mat-dialog-content [formGroup]="addForm" ><br><br>
+  <mat-form-field>
+    <input matInput id="name" placeholder="name" formControlName="name">
+  </mat-form-field><br>
+  <mat-form-field>
+    <input matInput id="weight" placeholder="weight" formControlName="weight">
+  </mat-form-field><br>
+  <mat-form-field>
+    <input matInput id="symbol" placeholder="symbol" formControlName="symbol">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions *ngIf="!data">
+  <button mat-raised-button color="primary" mat-dialog-close="false">Close</button>
+  <button mat-raised-button mat-dialog-close color="primary" (click)="onSubmit()">OK</button>
+</mat-dialog-actions> -->
+<h2 mat-dialog-title>Add User</h2><br>
+<mat-dialog-content [formGroup]="addForm" ngSubmit="onSubmit(addForm.value)"> <br>
+  <mat-form-field class="input-field" >
+    <input matInput placeholder="First Name" formControlName="firstName">
+    <!-- <mat-error *ngIf="!addForm.get('firstName').valid && addForm.get('firstName').touched" >
+      <mat-error *ngIf="addForm.get('firstName').errors['required']">Firstname is required</mat-error>
+      <mat-error *ngIf="addForm.get('firstName').errors['pattern']">Firstname contain only Alphabets</mat-error>
+      <mat-error *ngIf="addForm.get('firstName').errors['minlength']">Firstname Minimum Length is 4</mat-error> -->
+      <mat-error *ngIf="addForm.get('firstName').invalid">{{errorMessage('firstName')}}</mat-error>
+    <!-- </mat-error> -->
+  </mat-form-field><br>
+
+  <mat-form-field class="input-field">
+    <input matInput placeholder="Last Name" pattern="^[A-z]*$" minlength="4" formControlName="lastName">
+    <mat-error *ngIf="addForm.get('lastName').invalid">{{errorMessage('lastName')}}</mat-error>
+  </mat-form-field><br>
+
+  <mat-form-field class="input-field">
+    <input matInput placeholder="Email" formControlName="email">
+    <mat-error *ngIf="addForm.get('email').invalid">{{errorMessage('email')}}</mat-error>
+  </mat-form-field><br>
+
+  <mat-form-field class="input-field">
+    <input matInput placeholder="Password" formControlName="password">
+    <mat-error *ngIf="addForm.get('password').invalid">{{errorMessage('password')}}</mat-error>
+  </mat-form-field><br>
+
+  <mat-radio-group formControlName="gender">
+    <mat-radio-button value="male" >Male</mat-radio-button>
+    <mat-radio-button value="female" >Female</mat-radio-button>
+  </mat-radio-group><br>
+  
+  <mat-form-field class="input-field">
+    <input type="text" placeholder="Country" matInput formControlName="country" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let country of filteredContries  | async" [value]="country">
+        {{country}}
+      </mat-option>
+    </mat-autocomplete>
+    <mat-error *ngIf="addForm.get('country').invalid">{{errorMessage('country')}}</mat-error>
+  </mat-form-field>
+
+  <mat-chip-list #chipList class="input-field">
+    <mat-chip
+      *ngFor="let skill of addForm.get('skills').controls;let i=index;"
+      [selectable]="selectable"
+      [removable]="removable"
+      (removed)="remove(i)">{{skill.value}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+    <mat-form-field class="input-field" >
+      <input matInput
+        placeholder="Add Your Skills"
+        formArrayName="skills"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        [matChipInputAddOnBlur]="addOnBlur"
+        (matChipInputTokenEnd)="add($event)">
+        <mat-error *ngIf="addForm.get('skills').invalid">{{errorMessage('skills')}}</mat-error>
+    </mat-form-field>
+  </mat-chip-list>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" mat-dialog-close="false">Close</button>
+  <button mat-raised-button mat-dialog-close color="primary" [disabled]="!addForm.valid" (click)="onSubmit()">OK</button>
+</mat-dialog-actions>

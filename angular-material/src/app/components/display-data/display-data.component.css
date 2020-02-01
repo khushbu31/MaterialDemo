@@ -1,0 +1,18 @@
+.example-viewport {
+    height: 200px;
+    width: 200px;
+    border: 1px solid black;
+    display: flex;
+  }
+  
+.example-item {
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+}
+h3{
+  margin-left: 40px;
+}
+.container{
+  margin-bottom: 40px;
+}

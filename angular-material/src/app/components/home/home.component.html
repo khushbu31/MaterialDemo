@@ -1,0 +1,82 @@
+<div style="margin-bottom:-56px">
+  <mat-form-field style="margin-left:55px;padding-right: 79rem;">
+    <input
+      matInput
+      placeholder="search"
+      (input)="applyFilter($event.target.value)"
+    />
+  </mat-form-field>
+  <button mat-mini-fab color="primary">
+    <mat-icon color="primary" (click)="showFieldsDialog()">edit</mat-icon>
+  </button>
+  <button mat-mini-fab color="primary" matTooltip="Add" (click)="add()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+<div>
+  <mat-table
+    [dataSource]="dataSource"
+    matSort
+    class="mat-elevation-z8"
+    style="margin: 50px;">
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header > No. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.id }} </mat-cell>
+    </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="first_name" >
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        First Name<mat-icon (click)="showInput()" *ngIf="display">search</mat-icon>
+        <mat-form-field *ngIf="!display" >
+          <input  matInput  (input)="applyFilter($event.target.value)"/>
+        </mat-form-field>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <img mat-card-avatar class="avatar" src="{{ element.avatar }}" />
+        {{ element.first_name }}
+      </mat-cell>
+    </ng-container>
+    <!-- Weight Column -->
+    <ng-container matColumnDef="last_name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Last Name
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.last_name }} </mat-cell>
+    </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Email
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.email }} </mat-cell>
+    </ng-container>
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-icon
+          color="primary"
+          matTooltip="Edit"
+          class="btn-action"
+          (click)="edit(row)"
+          >edit</mat-icon
+        >
+        <mat-icon
+          color="primary"
+          matTooltip="Delete"
+          class="btn-action"
+          (click)="delete(row)"
+          >delete</mat-icon
+        >
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row
+      (click)="displayData(row)"
+      *matRowDef="let row; columns: displayedColumns"
+    ></mat-row>
+  </mat-table>
+</div>
+<mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
+

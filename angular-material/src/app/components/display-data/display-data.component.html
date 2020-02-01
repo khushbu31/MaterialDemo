@@ -1,0 +1,17 @@
+<!-- 
+<cdk-virtual-scroll-viewport itemSize="90" class="example-viewport">
+  <ng-container *cdkVirtualFor="let object of objects" class="example-item">
+    <div>{{object.stationName}} </div>
+  </ng-container>
+</cdk-virtual-scroll-viewport> -->
+<div class="container">
+<cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+  <div *cdkVirtualFor="let object of objects | keyvalue" class="example-item">
+    <h3>{{object.value}}</h3>
+  </div>
+</cdk-virtual-scroll-viewport>
+</div>
+
+<!-- <div *ngFor="let object of objects " class="example-viewport">
+  <p class="example-item">{{object.stationName}}</p>
+</div> -->

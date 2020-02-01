@@ -1,0 +1,16 @@
+<!-- <section formArrayName="chkbox" >
+    <mat-checkbox  (change)="addValue($event)" value="check1">Check me 1</mat-checkbox>
+    <mat-checkbox  (change)="addValue($event)" value="check2">Check me 2</mat-checkbox>
+</section> -->
+
+<h2 mat-dialog-title>Select Fields</h2><br>
+<mat-dialog-content [formGroup]="fieldForm"><br><br>
+  <section>
+      <mat-checkbox [checked]="field.checked" *ngFor="let field of displayCols;let i = index" (change)="addField($event)" value="{{field.value}}">{{field.value}}</mat-checkbox>
+      <br/>
+  </section>
+</mat-dialog-content>
+<mat-dialog-actions >
+  <button mat-raised-button color="primary" mat-dialog-close="false">Close</button>
+  <button mat-raised-button mat-dialog-close="{{displayCols}}" (click)="onSubmit()" color="primary">OK</button>
+</mat-dialog-actions>

@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>User</h2><br>
+<mat-dialog-content [formGroup]="updateForm" ><br><br>
+  <mat-form-field>
+    <input matInput id="name" placeholder="name" formControlName="name">
+  </mat-form-field><br>
+  <mat-form-field>
+    <input matInput id="weight" placeholder="weight" formControlName="weight">
+  </mat-form-field><br>
+  <mat-form-field>
+    <input matInput id="symbol" placeholder="symbol" formControlName="symbol">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions >
+  <button mat-raised-button color="primary" mat-dialog-close="false">Close</button>
+  <button mat-raised-button mat-dialog-close color="primary" (click)="onUpdate()">OK</button>
+</mat-dialog-actions>
+
+<!-- <mat-dialog-content [formGroup]="addForm" *ngIf="!data"><br><br>
+  <mat-form-field>
+    <input matInput id="name" placeholder="name" formControlName="name">
+  </mat-form-field><br>
+  <mat-form-field>
+    <input matInput id="weight" placeholder="weight" formControlName="weight">
+  </mat-form-field><br>
+  <mat-form-field>
+    <input matInput id="symbol" placeholder="symbol" formControlName="symbol">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions *ngIf="!data">
+  <button mat-raised-button color="primary" mat-dialog-close="false">Close</button>
+  <button mat-raised-button mat-dialog-close color="primary" (click)="onSubmit()">OK</button>
+</mat-dialog-actions> -->
